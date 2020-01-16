@@ -4,7 +4,7 @@ class NutritionFeed extends React.Component{
    render(){
         return (
           <div className="App">
-            <h1>Nutrition Feed</h1>
+            <h1>Trending in Nutrition</h1>
           </div>
         )
     } 

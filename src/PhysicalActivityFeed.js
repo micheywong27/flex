@@ -4,7 +4,7 @@ class PhysicalActivityFeed extends React.Component{
    render(){
         return (
           <div className="App">
-            <h1>Physical Activity Feed</h1>
+            <h1>Trending in Physical Activity</h1>
           </div>
         )
     } 
