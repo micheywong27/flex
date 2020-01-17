@@ -1,14 +1,11 @@
-import React from 'react';
+import React from'react';
 import Post from './Post';
 
-class NutritionFeed extends React.Component{
-
+class ActiveFeed extends React.Component{
    render(){
-     //all posts
-     //nutritionPosts = posts.filter(post => post.nutrition == true)
         return (
-          <div className="nutrition">
-            <h1>Trending in Nutrition</h1>
+          <div className="activity">
+            <h1>Trending in Physical Activity</h1>
             {
               this.props.posts.map((post, indx) =>{
                 return <Post 
@@ -21,4 +18,4 @@ class NutritionFeed extends React.Component{
         )
     } 
 }
-export default NutritionFeed 
+export default ActiveFeed; 

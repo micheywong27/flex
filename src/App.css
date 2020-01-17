@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  background-color: red;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +43,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 20px 5%;
+  align-items: center;
+  box-shadow: 1px 1px 2px 1px darkred;
 }

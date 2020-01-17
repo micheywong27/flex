@@ -5,6 +5,8 @@ class UserProfile extends React.Component{
         return (
           <div className="App">
             <h1>User Profile</h1>
+            <p>My Name</p>
+            <p>My Posts: </p>
           </div>
         )
     } 
