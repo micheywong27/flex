@@ -21,16 +21,15 @@ class App extends React.Component{
     allComments: []
   }
 
-  // can't call functions to filter b/c posts have to complete this func 1st
   componentDidMount(){
     fetch('http://127.0.0.1:3000/posts')
     .then(resp => resp.json())
-    .then(data => {
+    .then(posts => {
       this.setState({
-        posts: data,
+        posts: posts.data.map(post => post.attributes),
        
-        nutritionPosts: data.filter(post => post.nutrition === true),
-        activityPosts: data.filter(post => post.nutrition === false)
+        nutritionPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === true),
+        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false)
       })
     })
   }
@@ -38,7 +37,6 @@ class App extends React.Component{
   addPost=(post)=>{  
       this.setState({
         posts: [...this.state.posts, post],
-        
         nutritionPosts: post.nutrition ? [...this.state.nutritionPosts, post] : this.state.nutritionPosts , 
         activityPosts: !post.nutrition ? [...this.state.activityPosts, post] : this.state.activityPosts
       }) 
@@ -75,7 +73,7 @@ class App extends React.Component{
           headers:{ 'Content-Type': 'application/json',
                     'Accept': 'application/json'},
           body: JSON.stringify({
-            user_id: 8, content, nutrition: nutrition? true : false
+            user_id: 1, content, nutrition: nutrition? true : false
           })
         })
         .then( resp => resp.json())
@@ -102,36 +100,35 @@ class App extends React.Component{
   }
 
   commentInput=(e)=>{
-    console.log(e.target.name)
     this.setState({
       [e.target.name]: e.target.value 
     })
   }
 
-  addComment=(c)=>{
-    this.setState({
-      allComments: [...this.state.allComments, c]
-    })
+  addComment=(comment)=>{
+    return this.setState({
+      allComments: [...this.state.allComments, comment]
+    }, () => console.log(this.state.allComments))
   }
 
   // persist comments for each post, each comment has User ID/ Post Id
   //   comment belongs to post
-  onSubmit=(e, comment)=>{
+  onSubmit=(e)=>{
     e.preventDefault()
-    fetch('http://127.0.0.1:3000/posts', {
+    console.log('we in it!')
+    fetch('http://127.0.0.1:3000/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         "Accept": 'application/json'
        }, 
       body: JSON.stringify({
-        comment
+        textcomment: this.state.comment, user_id: 1, post_id: 1
       })   
     })
     .then(resp => resp.json())
-    .then(c => {
-      this.addComment(c)
-    })
+    .then(comment => this.addComment(comment))
+
     this.setState({
       comment: ''
     })

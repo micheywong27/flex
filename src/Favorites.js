@@ -5,14 +5,14 @@ class Favorites extends React.Component{
 
    render(){
         return (
-          <div className="nutrition">
+          <div className="post-container">
             <h1>My Favorites</h1>
             {
               this.props.myFavs.map((post, indx) =>{
                 return <Post 
                           key={indx}
                           post={post}
-                          onSubmit={this.onSubmit}
+                          onSubmit={this.props.onSubmit}
                           allComments={this.props.allComments}
                           comment={this.props.comment}
                           commentInput={this.props.commentInput}

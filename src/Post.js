@@ -17,7 +17,7 @@ class Post extends React.Component{
         return (
           <div className="post">
             <h1>{this.props.post.content}</h1>
-            <p>Comments: {this.props.allComments}</p>
+            <p>Comments: {this.props.allComments.map(comment => comment.textcomment)}</p>
               <div>
                 <span role="img" aria-label="clap" onClick={()=>this.props.clapCount(this.props.post)}> 👏 </span>
                 <span role="img" aria-label="favorite" onClick={()=>this.props.addToFavs(this.props.post)}> ❤️ </span>
@@ -26,12 +26,14 @@ class Post extends React.Component{
                   <button onClick={this.buttonToggle}>Comment</button>
                   :
                   (<div> 
-                  <input type="text" 
+                  <form onSubmit={(e) => { this.props.onSubmit(e); console.log('I hit it!'); return this.buttonToggle} }>
+                    <input type="text" 
                           name="comment"
                           placeholder="Add comment" 
                           value={this.props.comment} 
                           onChange={e => this.props.commentInput(e)}/>
-                  <button onClick={this.buttonToggle} onSubmit={() =>this.props.onSubmit(this.props.comment)}>Submit</button>
+                    <input type="submit" value="Submit" />
+                  </form>
                   </div>)
                 } 
               </div>

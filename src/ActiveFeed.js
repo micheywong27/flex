@@ -4,14 +4,14 @@ import Post from './Post';
 class ActiveFeed extends React.Component{
    render(){
         return (
-          <div className="activity">
+          <div className="post-container">
             <h1>Trending in Physical Activity</h1>
             {
               this.props.posts.map((post, indx) =>{
                 return <Post 
                           key={indx}
                           post={post}
-                          onSubmit={this.onSubmit}
+                          onSubmit={this.props.onSubmit}
                           comment={this.props.comment}
                           allComments={this.props.allComments}
                           commentInput={this.props.commentInput}

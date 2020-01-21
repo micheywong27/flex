@@ -7,14 +7,14 @@ class NutritionFeed extends React.Component{
      //all posts
      //nutritionPosts = posts.filter(post => post.nutrition == true)
         return (
-          <div className="nutrition">
+          <div className="post-container">
             <h1>Trending in Nutrition</h1>
             {
               this.props.posts.map((post, indx) =>{
                 return <Post 
                           key={indx}
                           post={post}
-                          onSubmit={this.onSubmit}
+                          onSubmit={this.props.onSubmit}
                           allComments={this.props.allComments}
                           comment={this.props.comment}
                           commentInput={this.props.commentInput}

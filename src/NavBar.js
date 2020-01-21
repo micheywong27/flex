@@ -9,11 +9,11 @@ class NavBar extends React.Component{
                 <input  placeholder="Search the feeds..."/>
                 <button><div>Submit</div></button>
               </div>
-              <Link to="/form"><div>Create a post</div></Link>
-              <Link to="/nutrition"><div>Nutrition Feed</div></Link>
-              <Link to="/physicalactivity"><div>Active Feed</div></Link>
-              <Link to="/user"><div>User Profile</div></Link>
-              <Link to="/favorites"><div>My Favorites</div></Link>
+              <Link to="/form" className="link"><div>Create a post</div></Link>
+              <Link to="/nutrition" className="link"><div>Nutrition Feed</div></Link>
+              <Link to="/physicalactivity" className="link"><div>Active Feed</div></Link>
+              <Link to="/user" className="link"><div>User Profile</div></Link>
+              <Link to="/favorites" className="link"><div>My Favorites</div></Link>
           </div>
         )
     } 
