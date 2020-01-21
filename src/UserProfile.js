@@ -3,7 +3,7 @@ import React from'react';
 class UserProfile extends React.Component{
    render(){
         return (
-          <div className="App">
+          <div className="post">
             <h1>User Profile</h1>
             <p>My Name</p>
             <p>My Posts: </p>

@@ -47,6 +47,27 @@
   font-size: 20px;
   color: white
 }
+
+.login {
+  color: white;
+  display: flex;
+  font-family: cursive;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 20px 5%;
+  align-items: center;
+  box-shadow: 1px 1px 2px 1px darkred;
+  border-style: ridge;
+  border-color: darkred;
+  border: 2px solid red;
+  border-radius: 5px;
+  background: #f09433; 
+  background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+  background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+}
+
 .post {
   color: white;
   display: flex;
@@ -71,6 +92,7 @@
   font-family: cursive;
   font-size: 15px;
 }
+
 .nav-bar {
   font-family: cursive;
 }
