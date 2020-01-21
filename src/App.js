@@ -7,6 +7,7 @@ import ActiveFeed from './ActiveFeed';
 import UserProfile from './UserProfile';
 import Form from './Form'
 import Login from './Login'
+import Favorites from './Favorites'
 import { Route, Switch } from 'react-router-dom';
 
 class App extends React.Component{
@@ -14,7 +15,10 @@ class App extends React.Component{
     posts: [],
     nutritionPosts: [],
     activityPosts: [],
-    content: ''
+    content: '',
+    myFavs: [],
+    comment: '',
+    allComments: []
   }
 
   // can't call functions to filter b/c posts have to complete this func 1st
@@ -24,6 +28,7 @@ class App extends React.Component{
     .then(data => {
       this.setState({
         posts: data,
+       
         nutritionPosts: data.filter(post => post.nutrition === true),
         activityPosts: data.filter(post => post.nutrition === false)
       })
@@ -38,8 +43,30 @@ class App extends React.Component{
         activityPosts: !post.nutrition ? [...this.state.activityPosts, post] : this.state.activityPosts
       }) 
     }
+
+  deletePost=(post)=>{
+  let updatedPosts= this.state.posts.filter((myPost)=>{
+      return myPost.id !== post.id
+    })
+    this.setState({ 
+      posts: updatedPosts,
+      nutritionPosts: post.nutrition ? this.state.nutritionPosts.filter(p => p !== post ) : this.state.nutritionPosts , 
+      activityPosts: !post.nutrition ? this.state.activityPosts.filter(p => p !== post ) : this.state.activityPosts
+    })
+  }
+
+  //onClick, claps incremment number by 1 (claps live in App b/c claps will belong to user)
+      //each post has claps, make specific posts claps + 1
+  //****** HOW DO YOU MODIFY A POST IN THE BACKEND TO +1 since we arent modifying state?
+  //each user owns 1 clap per post
+  clapCount=(post)=>{
+   console.log(post.clap)
+    
+  }
+
+  //create a remove from favs button (when clicked it unfavorites)
   
-  //*********** when posting, it's not setting in a true or false value */
+
   filter=(e, nutrition)=>{
     e.preventDefault()
     let { content } = this.state;
@@ -66,8 +93,52 @@ class App extends React.Component{
     })
   }
 
+  addToFavs=(post)=>{
+    if(!this.state.myFavs.includes(post)){
+      this.setState({
+        myFavs: [...this.state.myFavs, post]
+      })
+    }
+  }
+
+  commentInput=(e)=>{
+    console.log(e.target.name)
+    this.setState({
+      [e.target.name]: e.target.value 
+    })
+  }
+
+  addComment=(c)=>{
+    this.setState({
+      allComments: [...this.state.allComments, c]
+    })
+  }
+
+  // persist comments for each post, each comment has User ID/ Post Id
+  //   comment belongs to post
+  onSubmit=(e, comment)=>{
+    e.preventDefault()
+    fetch('http://127.0.0.1:3000/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": 'application/json'
+       }, 
+      body: JSON.stringify({
+        comment
+      })   
+    })
+    .then(resp => resp.json())
+    .then(c => {
+      this.addComment(c)
+    })
+    this.setState({
+      comment: ''
+    })
+
+  }
+
   render(){
-    console.log(this.state.nutritionPosts)
     return (
       <div className="App">
         <NavBar />
@@ -75,8 +146,36 @@ class App extends React.Component{
             <Route path="/form" render={() =>  <Form filter={this.filter}   
                                                       onChange={this.onChange}
                                                       content={this.state.content}/>}/>
-            <Route path="/nutrition" render={() =>  <NutritionFeed posts={this.state.nutritionPosts}/>}/>
-            <Route path="/physicalactivity" render={() =>  <ActiveFeed posts={this.state.activityPosts}/>}/>
+            <Route path="/nutrition" render={() =>  <NutritionFeed posts={this.state.nutritionPosts}
+                                                                    deletePost={this.deletePost}
+                                                                    addToFavs={this.addToFavs}
+                                                                    myFavs={this.state.myFavs}
+                                                                    commentInput={this.commentInput}
+                                                                    onSubmit={this.onSubmit}
+                                                                    comment={this.state.comment}
+                                                                    allComments={this.state.allComments}
+                                                                    clapCount={this.clapCount}/> 
+                                                                    }/>
+            <Route path="/physicalactivity" render={() =>  <ActiveFeed posts={this.state.activityPosts}
+                                                                      deletePost={this.deletePost}
+                                                                      addToFavs={this.addToFavs}
+                                                                      myFavs={this.state.myFavs}
+                                                                      commentInput={this.commentInput}
+                                                                      onSubmit={this.onSubmit}
+                                                                      comment={this.state.comment}
+                                                                      allComments={this.state.allComments}
+                                                                      clapCount={this.clapCount}/> 
+                                                                      }/>
+            <Route path="/favorites" render={() => <Favorites posts={this.state.activityPosts}
+                                                                      deletePost={this.deletePost}
+                                                                      addToFavs={this.addToFavs}
+                                                                      myFavs={this.state.myFavs}
+                                                                      clapCount={this.clapCount}
+                                                                      onSubmit={this.onSubmit}
+                                                                      comment={this.state.comment}
+                                                                      allComments={this.state.allComments}
+                                                                      commentInput={this.commentInput}/> 
+                                                                    }/>
             <Route path="/user" render={() => <UserProfile />}/>
             <Route exact path="/" render={() => <Login />} />
           </Switch>

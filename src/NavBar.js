@@ -13,6 +13,7 @@ class NavBar extends React.Component{
               <Link to="/nutrition"><div>Nutrition Feed</div></Link>
               <Link to="/physicalactivity"><div>Active Feed</div></Link>
               <Link to="/user"><div>User Profile</div></Link>
+              <Link to="/favorites"><div>My Favorites</div></Link>
           </div>
         )
     } 

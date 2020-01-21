@@ -1,23 +1,24 @@
-import React from'react';
+import React from 'react';
 import Post from './Post';
 
-class ActiveFeed extends React.Component{
+class Favorites extends React.Component{
+
    render(){
         return (
-          <div className="activity">
-            <h1>Trending in Physical Activity</h1>
+          <div className="nutrition">
+            <h1>My Favorites</h1>
             {
-              this.props.posts.map((post, indx) =>{
+              this.props.myFavs.map((post, indx) =>{
                 return <Post 
                           key={indx}
                           post={post}
                           onSubmit={this.onSubmit}
-                          comment={this.props.comment}
                           allComments={this.props.allComments}
+                          comment={this.props.comment}
                           commentInput={this.props.commentInput}
+                          myFavs={this.props.myFavs}
                           deletePost={this.props.deletePost}
                           addToFavs={this.props.addToFavs}
-                          myFavs={this.props.myFavs}
                           clapCount={this.props.clapCount}
                         />
               })
@@ -26,4 +27,4 @@ class ActiveFeed extends React.Component{
         )
     } 
 }
-export default ActiveFeed; 
+export default Favorites 

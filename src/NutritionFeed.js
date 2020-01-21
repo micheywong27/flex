@@ -14,6 +14,14 @@ class NutritionFeed extends React.Component{
                 return <Post 
                           key={indx}
                           post={post}
+                          onSubmit={this.onSubmit}
+                          allComments={this.props.allComments}
+                          comment={this.props.comment}
+                          commentInput={this.props.commentInput}
+                          deletePost={this.props.deletePost}
+                          addToFavs={this.props.addToFavs}
+                          myFavs={this.props.myFavs}
+                          clapCount={this.props.clapCount}
                         />
               })
             }
