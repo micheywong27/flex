@@ -111,11 +111,8 @@ class App extends React.Component{
     }, () => console.log(this.state.allComments))
   }
 
-  // persist comments for each post, each comment has User ID/ Post Id
-  //   comment belongs to post
   onSubmit=(e)=>{
     e.preventDefault()
-    console.log('we in it!')
     fetch('http://127.0.0.1:3000/comments', {
       method: 'POST',
       headers: {
@@ -132,7 +129,6 @@ class App extends React.Component{
     this.setState({
       comment: ''
     })
-
   }
 
   render(){
@@ -151,7 +147,8 @@ class App extends React.Component{
                                                                     onSubmit={this.onSubmit}
                                                                     comment={this.state.comment}
                                                                     allComments={this.state.allComments}
-                                                                    clapCount={this.clapCount}/> 
+                                                                    clapCount={this.clapCount}
+                                                                    /> 
                                                                     }/>
             <Route path="/physicalactivity" render={() =>  <ActiveFeed posts={this.state.activityPosts}
                                                                       deletePost={this.deletePost}
@@ -171,7 +168,8 @@ class App extends React.Component{
                                                                       onSubmit={this.onSubmit}
                                                                       comment={this.state.comment}
                                                                       allComments={this.state.allComments}
-                                                                      commentInput={this.commentInput}/> 
+                                                                      commentInput={this.commentInput}
+                                                                      /> 
                                                                     }/>
             <Route path="/user" render={() => <UserProfile />}/>
             <Route exact path="/" render={() => <Login />} />
@@ -180,5 +178,4 @@ class App extends React.Component{
     )
   }
 }
-
 export default App;

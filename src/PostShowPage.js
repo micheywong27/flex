@@ -1,30 +1,27 @@
-import React from'react'
-import PostShowPage from './PostShowPage'
+import React from 'react';
 
-class Post extends React.Component{
-
+class PostShowPage extends React.Component{
   state ={
-    button: true
+    commentButton: true
   }
 
-  buttonToggle=()=>{
+  commentButtonToggle=()=>{
     this.setState({
-      button: !this.state.button
+      commentButton: !this.state.commentButton
     })
   }
+    render(){
 
-   render(){
-    //  let buttonText = this.props.myFavs.includes(this.props.post) ? "Favorited!" : "Favorite ❤️"
-        return (
-              <div className="post">
-                    <h1 onClick={() => this.props.showPage(this.props.post)}>{this.props.post.content}</h1>
-                    <p>Comments: {this.props.allComments.map(comment => comment.textcomment)}</p>
-                      <div>
+        return(
+            <div className="post">
+                <h1>{this.props.post.content}</h1>
+                <h2>Comments: {this.props.post.comment}</h2>
+                    <div>
                         <span role="img" aria-label="clap" onClick={()=>this.props.clapCount(this.props.post)}> 👏 </span>
                         <span role="img" aria-label="favorite" onClick={()=>this.props.addToFavs(this.props.post)}> ❤️ </span>
                         <span role="img" aria-label="delete" onClick={()=>this.props.deletePost(this.props.post)}> ❌ </span>
-                        {this.state.button ? 
-                            <button onClick={this.buttonToggle}>Comment</button>
+                        {this.state.commentButton ? 
+                            <button onClick={this.commentButtonToggle}>Comment</button>
                           :
                             (<div> 
                               <form onSubmit={(e) => { this.props.onSubmit(e); return this.buttonToggle} }>
@@ -37,9 +34,10 @@ class Post extends React.Component{
                               </form>
                             </div>)
                         } 
-                      </div>
-              </div>
+                    </div>
+                <button onClick={() => this.props.showPage(null)}>Go back to feed</button>
+            </div>
         )
-    } 
+    }
 }
-export default Post 
+export default PostShowPage
