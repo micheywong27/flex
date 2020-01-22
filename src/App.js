@@ -5,9 +5,9 @@ import NavBar from './NavBar';
 import NutritionFeed from './NutritionFeed';
 import ActiveFeed from './ActiveFeed';
 import UserProfile from './UserProfile';
-import Form from './Form'
-import Login from './Login'
-import Favorites from './Favorites'
+import Form from './Form';
+import Login from './Login';
+import Favorites from './Favorites';
 import { Route, Switch } from 'react-router-dom';
 
 class App extends React.Component{
@@ -99,6 +99,15 @@ class App extends React.Component{
     }
   }
 
+  removeFromFavs=(post)=>{
+    let updatedFavs = this.state.myFavs.filter(p =>{
+      return p !== post
+    })
+    this.setState({
+      myFavs: updatedFavs
+    })
+  }
+
   commentInput=(e)=>{
     this.setState({
       [e.target.name]: e.target.value 
@@ -134,7 +143,7 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <NavBar />
+        <NavBar posts={this.state.posts}/>
           <Switch>
             <Route path="/form" render={() =>  <Form filter={this.filter}   
                                                       onChange={this.onChange}
@@ -142,6 +151,7 @@ class App extends React.Component{
             <Route path="/nutrition" render={() =>  <NutritionFeed posts={this.state.nutritionPosts}
                                                                     deletePost={this.deletePost}
                                                                     addToFavs={this.addToFavs}
+                                                                    removeFromFavs={this.removeFromFavs}
                                                                     myFavs={this.state.myFavs}
                                                                     commentInput={this.commentInput}
                                                                     onSubmit={this.onSubmit}
@@ -153,6 +163,7 @@ class App extends React.Component{
             <Route path="/physicalactivity" render={() =>  <ActiveFeed posts={this.state.activityPosts}
                                                                       deletePost={this.deletePost}
                                                                       addToFavs={this.addToFavs}
+                                                                      removeFromFavs={this.removeFromFavs}
                                                                       myFavs={this.state.myFavs}
                                                                       commentInput={this.commentInput}
                                                                       onSubmit={this.onSubmit}
@@ -163,6 +174,7 @@ class App extends React.Component{
             <Route path="/favorites" render={() => <Favorites posts={this.state.activityPosts}
                                                                       deletePost={this.deletePost}
                                                                       addToFavs={this.addToFavs}
+                                                                      removeFromFavs={this.removeFromFavs}
                                                                       myFavs={this.state.myFavs}
                                                                       clapCount={this.clapCount}
                                                                       onSubmit={this.onSubmit}

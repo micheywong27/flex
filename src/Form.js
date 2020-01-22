@@ -22,7 +22,7 @@ class Form extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="form">
                 <form onSubmit={(e)=>this.props.filter(e,this.state.nutrition)}>
                     <div>
                     <h3>Nutrition<input type="radio" 

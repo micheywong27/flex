@@ -32,6 +32,7 @@ class ActiveFeed extends React.Component{
                                 commentInput={this.props.commentInput}
                                 deletePost={this.props.deletePost}
                                 addToFavs={this.props.addToFavs}
+                                removeFromFavs={this.props.removeFromFavs}
                                 myFavs={this.props.myFavs}
                                 clapCount={this.props.clapCount}
                                 showPage={this.showPage}
