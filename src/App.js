@@ -29,7 +29,8 @@ class App extends React.Component{
         posts: posts.data.map(post => post.attributes),
        
         nutritionPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === true),
-        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false)
+        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false),
+        // allComments: posts.data.map(post => post.attributes.comments)
       })
     })
   }
