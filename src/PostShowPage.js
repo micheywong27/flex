@@ -40,4 +40,4 @@ class PostShowPage extends React.Component{
         )
     }
 }
-export default PostShowPage
+export default PostShowPage;

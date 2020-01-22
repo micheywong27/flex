@@ -14,13 +14,13 @@ class NutritionFeed extends React.Component{
   }
 
    render(){
-        return (
-          this.state.showPostPage ?
+      return (
+        this.state.showPostPage ?
           <PostShowPage post={this.state.showPostPage}
                         showPage={this.showPage}/>
-          :
-            (<div className="post-container">
-                <h1>Trending in Nutrition</h1>
+        :
+          (<div className="post-container">
+              <h1>Trending in Nutrition</h1>
                 {
                   this.props.posts.map((post, indx) =>{
                     return <Post 
@@ -31,15 +31,16 @@ class NutritionFeed extends React.Component{
                               comment={this.props.comment}
                               commentInput={this.props.commentInput}
                               deletePost={this.props.deletePost}
+                              removeFromFavs={this.props.removeFromFavs}
                               addToFavs={this.props.addToFavs}
                               myFavs={this.props.myFavs}
                               clapCount={this.props.clapCount}
                               showPage={this.showPage}
                             />
-                })
-              }
-            </div>)
+                  })
+                }
+          </div>)
         )
     } 
 }
-export default NutritionFeed 
+export default NutritionFeed;
