@@ -29,7 +29,8 @@ class App extends React.Component{
         posts: posts.data.map(post => post.attributes),
        
         nutritionPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === true),
-        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false)
+        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false),
+        // allComments: posts.data.map(post => post.attributes.comments)
       })
     })
   }
@@ -53,17 +54,24 @@ class App extends React.Component{
     })
   }
 
-  //onClick, claps incremment number by 1 (claps live in App b/c claps will belong to user)
-      //each post has claps, make specific posts claps + 1
-  //****** HOW DO YOU MODIFY A POST IN THE BACKEND TO +1 since we arent modifying state?
-  //each user owns 1 clap per post
   clapCount=(post)=>{
-   console.log(post.clap)
-    
+    let claps = post.clap += 1;
+    fetch(`http://localhost:3000/posts/${post.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ id: post.id, clap: claps})
+    })
+    .then(res => res.json())
+    .then(newClaps => {
+      console.log(newClaps)
+      this.setState({
+        posts: [newClaps, ...this.state.posts.filter(post => post.id !== newClaps.id)]
+      })
+    })
   }
-
-  //create a remove from favs button (when clicked it unfavorites)
-  
 
   filter=(e, nutrition)=>{
     e.preventDefault()
@@ -93,9 +101,20 @@ class App extends React.Component{
 
   addToFavs=(post)=>{
     if(!this.state.myFavs.includes(post)){
-      this.setState({
-        myFavs: [...this.state.myFavs, post]
-      })
+        fetch('http://127.0.0.1:3000/favorites', {
+          method: 'POST',
+          headers:{ 'Content-Type': 'application/json',
+                    'Accept': 'application/json'},
+          body: JSON.stringify({
+            user_id: 1, post_id: post.id
+          })
+        })
+        .then( resp => resp.json())
+        .then( post => {
+          this.setState({
+            myFavs: [...this.state.myFavs, post]
+          })
+        })
     }
   }
 
@@ -115,9 +134,9 @@ class App extends React.Component{
   }
 
   addComment=(comment)=>{
-    return this.setState({
+    this.setState({
       allComments: [...this.state.allComments, comment]
-    }, () => console.log(this.state.allComments))
+    })
   }
 
   onSubmit=(e)=>{
@@ -134,7 +153,6 @@ class App extends React.Component{
     })
     .then(resp => resp.json())
     .then(comment => this.addComment(comment))
-
     this.setState({
       comment: ''
     })

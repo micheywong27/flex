@@ -11,7 +11,6 @@ class PostShowPage extends React.Component{
     })
   }
     render(){
-
         return(
             <div className="post">
                 <h1>{this.props.post.content}</h1>

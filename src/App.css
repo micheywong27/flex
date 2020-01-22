@@ -117,3 +117,14 @@
 .nav-bar {
   font-family: cursive;
 }
+
+.img{
+  border-radius: 50%;
+  width: 16em;
+  height: 8em;
+  align-self: left;
+}
+
+.headerImg {
+  width: 100%;
+}
