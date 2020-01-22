@@ -125,6 +125,10 @@
   align-self: left;
 }
 
+.postimage{
+  width: 30%;
+}
+
 .headerImg {
   width: 100%;
 }

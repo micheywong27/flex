@@ -12,19 +12,17 @@ class Post extends React.Component{
     })
   }
 
-  //filter then map
 
    render(){
      let buttonText = this.props.myFavs.includes(this.props.post) ? "❤️" : "♡"
-    //  let url = `http://localhost:3000${this.props.post.media_url}`
-        return (
+     let img = this.props.post.image
+        return (   
           <div className="post">
-                {/* <img src={url} alt="" /> */}
+                <img src={img} className="postimage" alt="postimage"/>
                 <h1 onClick={() => this.props.showPage(this.props.post)}>{this.props.post.content}</h1>
-                <p>Comments: {this.props.post.comments.map(comment => <li>{comment.textcomment}</li>)}</p>
                   <div>
                     <span role="img" aria-label="clap" onClick={()=>this.props.clapCount(this.props.post)}> {this.props.post.clap} 👏 </span>
-                    <span role="img" aria-label="favorite" onClick={()=> this.props.myFavs.includes(this.props.post) ? this.props.removeFromFavs(this.props.post) : this.props.addToFavs(this.props.post) }> {buttonText} </span>
+                    <span role="img" aria-label="favorite" onClick={()=> this.props.myFavs.includes(this.props.post) ? this.props.removeFromFavs(this.props.post) : this.props.addToFavs(this.props.post)}> {buttonText} </span>
                      <span role="img" aria-label="delete" onClick={()=>this.props.deletePost(this.props.post)}> ❌ </span>
                       {this.state.button ? 
                          <button onClick={this.buttonToggle}>Comment</button>

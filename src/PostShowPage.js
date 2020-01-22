@@ -11,10 +11,13 @@ class PostShowPage extends React.Component{
     })
   }
     render(){
+      let img = this.props.post.image
         return(
             <div className="post">
+                <img src={img} className="postimage" alt="postimage"/>
                 <h1>{this.props.post.content}</h1>
-                <h2>Comments: {this.props.post.comment}</h2>
+                <h2>Comments: 
+                  <br></br>{this.props.post.comment}</h2>                 
                     <div>
                         <span role="img" aria-label="clap" onClick={()=>this.props.clapCount(this.props.post)}> 👏 </span>
                         <span role="img" aria-label="favorite" onClick={()=>this.props.addToFavs(this.props.post)}> ❤️ </span>

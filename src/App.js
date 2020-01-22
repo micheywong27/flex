@@ -29,8 +29,7 @@ class App extends React.Component{
         posts: posts.data.map(post => post.attributes),
        
         nutritionPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === true),
-        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false),
-        // allComments: posts.data.map(post => post.attributes.comments)
+        activityPosts: posts.data.map(post => post.attributes).filter(post => post.nutrition === false)
       })
     })
   }
@@ -66,14 +65,13 @@ class App extends React.Component{
     })
     .then(res => res.json())
     .then(newClaps => {
-      console.log(newClaps)
       this.setState({
         posts: [newClaps, ...this.state.posts.filter(post => post.id !== newClaps.id)]
       })
     })
   }
 
-  filter=(e, nutrition)=>{
+  filter=(e, nutrition,url)=>{
     e.preventDefault()
     let { content } = this.state;
         fetch('http://127.0.0.1:3000/posts', {
@@ -81,7 +79,7 @@ class App extends React.Component{
           headers:{ 'Content-Type': 'application/json',
                     'Accept': 'application/json'},
           body: JSON.stringify({
-            user_id: 1, content, nutrition: nutrition? true : false
+            user_id: 1, content, nutrition: nutrition? true : false, image: url
           })
         })
         .then( resp => resp.json())
@@ -101,22 +99,11 @@ class App extends React.Component{
 
   addToFavs=(post)=>{
     if(!this.state.myFavs.includes(post)){
-        fetch('http://127.0.0.1:3000/favorites', {
-          method: 'POST',
-          headers:{ 'Content-Type': 'application/json',
-                    'Accept': 'application/json'},
-          body: JSON.stringify({
-            user_id: 1, post_id: post.id
-          })
-        })
-        .then( resp => resp.json())
-        .then( post => {
           this.setState({
             myFavs: [...this.state.myFavs, post]
           })
-        })
+        }
     }
-  }
 
   removeFromFavs=(post)=>{
     let updatedFavs = this.state.myFavs.filter(p =>{
@@ -158,12 +145,19 @@ class App extends React.Component{
     })
   }
 
+  onChangeForm=(e)=>{
+    this.setState({
+        url: e.target.value
+    })
+}
+
   render(){
     return (
       <div className="App">
         <NavBar posts={this.state.posts}/>
           <Switch>
-            <Route path="/form" render={() =>  <Form filter={this.filter}   
+            <Route path="/form" render={() =>  <Form filter={this.filter}
+                                                      onChangeForm={this.onChangeForm}   
                                                       onChange={this.onChange}
                                                       content={this.state.content}/>}/>
             <Route path="/nutrition" render={() =>  <NutritionFeed posts={this.state.nutritionPosts}
