@@ -13,7 +13,7 @@ class NavBar extends React.Component{
               <Link to="/form" className="link"><div>Create a post</div></Link>
               <Link to="/nutrition" className="link"><div>Nutrition Feed</div></Link>
               <Link to="/physicalactivity" className="link"><div>Active Feed</div></Link>
-              <Link to="/user" className="link"><div>Hector's Profile</div></Link>
+              <Link to="/user" className="link"><div>My Profile</div></Link>
               <Link to="/favorites" className="link"><div>My Favorites</div></Link>
           </div>
         )

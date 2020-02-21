@@ -14,8 +14,7 @@ class UserProfile extends React.Component{
   render(){
     return (
       <div className="post">
-          <img className="headerImg"src="https://media.giphy.com/media/KziKCpvrGngHbYjaUF/giphy.gif"alt="yoda" />
-          <h1 className="username">Hector Polanco</h1>
+          <h1 className="username">Michelle Wong</h1>
           <img className="img" src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/mandalorian-babyyoda-plush-frontpage-700x311.jpg" alt="babyyoda"/>
           <h2>My Posts: </h2>
           <p>I ran to school today in only 5 minutes!</p>
