@@ -127,6 +127,7 @@ class App extends React.Component{
   }
 
   onSubmit=(e)=>{
+    console.log("inside on submit", this.state.comment)
     e.preventDefault()
     fetch('http://127.0.0.1:3000/comments', {
       method: 'POST',

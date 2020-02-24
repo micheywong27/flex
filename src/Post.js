@@ -1,7 +1,6 @@
 import React from'react';
 
 class Post extends React.Component{
-
   state ={
     button: true
   }
@@ -11,7 +10,6 @@ class Post extends React.Component{
       button: !this.state.button
     })
   }
-
 
    render(){
      let buttonText = this.props.myFavs.includes(this.props.post) ? "❤️" : "♡"
@@ -23,21 +21,21 @@ class Post extends React.Component{
                   <div>
                     <span role="img" aria-label="clap" onClick={()=>this.props.clapCount(this.props.post)}> {this.props.post.clap} 👏 </span>
                     <span role="img" aria-label="favorite" onClick={()=> this.props.myFavs.includes(this.props.post) ? this.props.removeFromFavs(this.props.post) : this.props.addToFavs(this.props.post)}> {buttonText} </span>
-                     <span role="img" aria-label="delete" onClick={()=>this.props.deletePost(this.props.post)}> ❌ </span>
-                      {this.state.button ? 
-                         <button onClick={this.buttonToggle}>Comment</button>
-                      :
+                    <span role="img" aria-label="delete" onClick={()=>this.props.deletePost(this.props.post)}> ❌ </span>
+                    {/* {this.state.button ? 
+                       <button onClick={this.buttonToggle}>Comment</button>
+                    :
                       (<div> 
                          <form onSubmit={(e) => { this.props.onSubmit(e); return this.buttonToggle} }>
                             <input type="text" 
-                                  name="comment"
-                                  placeholder="Add comment" 
-                                  value={this.props.comment} 
-                                  onChange={e => this.props.commentInput(e)}/>
-                              <input type="submit" value="Submit" />
-                          </form>
-                        </div>)
-                      } 
+                              name="comment"
+                              placeholder="Add comment" 
+                              value={this.props.comment} 
+                              onChange={e => this.props.commentInput(e)}/>
+                            <input type="submit" value="Submit" />
+                        </form>
+                      </div>)
+                    }  */}
                   </div>
             </div>
         )
